@@ -22,6 +22,8 @@
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
+    "eslint": "^9.35.0",
+    "prettier": "^3.6.2",
     "@angular-devkit/build-angular": "^17.2.2",
     "@angular/cli": "^17.2.2",
     "@angular/compiler-cli": "^17.2.0",
