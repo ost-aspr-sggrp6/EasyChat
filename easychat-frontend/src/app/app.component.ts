@@ -4,10 +4,9 @@ import { NgFor } from '@angular/common';
 import { SocketService } from './services/socket.service';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [FormsModule, NgFor],
-  template: `
+    selector: 'app-root',
+    imports: [FormsModule, NgFor],
+    template: `
     <h1>Chatify Frontend</h1>
     <input [(ngModel)]="message" placeholder="Nachricht schreiben..." />
     <button (click)="send()">Senden</button>
@@ -16,7 +15,7 @@ import { SocketService } from './services/socket.service';
     <ul>
       <li *ngFor="let msg of messages">{{ msg }}</li>
     </ul>
-  `,
+  `
 })
 export class AppComponent implements OnInit {
   message = '';
