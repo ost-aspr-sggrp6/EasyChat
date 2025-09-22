@@ -1,3 +1,12 @@
+---
+name: Story
+about: Story Template
+title: ''
+labels: ''
+assignees: ''
+
+---
+
 Als ... möchte ich ... damit ...
 **Tasks**
 - [ ] Task1
