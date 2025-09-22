@@ -21,7 +21,6 @@ export class LayoutComponent implements OnInit {
 
   private socketService = inject(SocketService);
 
-
   ngOnInit(): void {
     // Eingehende Nachrichten vom Server abonnieren
     this.socketService.onMessage().subscribe((msg: string) => {

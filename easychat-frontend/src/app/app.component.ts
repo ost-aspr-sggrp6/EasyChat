@@ -1,40 +1,13 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { SocketService } from './core/socket/socket.service';
+import { Component } from '@angular/core';
 import { LayoutComponent } from './layout/layout.component';
-import { CommonModule } from '@angular/common';
-import { ToolbarModule } from 'primeng/toolbar';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
 import { RouterOutlet } from '@angular/router';
 
 
 @Component({
-  selector: 'app-root',
+  selector: 'easychat-root',
   standalone: true,
-  imports: [FormsModule, LayoutComponent, CommonModule, ToolbarModule, ButtonModule, InputTextModule, RouterOutlet],
+  imports: [LayoutComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-  message = '';
-  messages: string[] = [];
-
-  private socketService = inject(SocketService);
-
-  ngOnInit(): void {
-    // Eingehende Nachrichten vom Server abonnieren
-    this.socketService.onMessage().subscribe((msg: string) => {
-      console.log('Received message:', msg);
-      this.messages.push(msg);
-    });
-  }
-
-  send(): void {
-    if (this.message.trim()) {
-      console.log('Sending message:', this.message);
-      this.socketService.sendMessage(this.message);
-      this.message = '';
-    }
-  }
-}
+export class AppComponent  { }
