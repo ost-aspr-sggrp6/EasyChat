@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,17 +10,21 @@ export class SocketService {
   private socket: Socket;
 
   constructor() {
-    // Mit deinem Backend verbinden
-    this.socket = io('http://localhost:3000'); // URL vom Backend
+    this.socket = io(environment.socketUrl);
   }
 
-  // Nachricht senden
+  joinRoom(roomId: string): void {
+    this.socket.emit('joinRoom', roomId);
+  }
+
+  leaveRoom(roomId: string): void {
+    this.socket.emit('leaveRoom', roomId);
+  }
+
   sendMessage(message: string): void {
-    console.log('Sending message:', message);
     this.socket.emit('chatMessage', message);
   }
 
-  // Nachrichten empfangen
   onMessage(): Observable<string> {
     return new Observable((subscriber) => {
       this.socket.on('chatMessage', (msg: string) => {
