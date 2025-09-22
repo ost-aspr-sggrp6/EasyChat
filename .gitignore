@@ -46,8 +46,8 @@ mongo-data/
 *.pid
 
 # ---- Misc ----
-/chatify-frontend/.angular/cache/
-/chatify-frontend/.angular/*
-/chatify-frontend/.cache
-/chatify-frontend/.sass-cache
-/chatify-backend/.cache
+/easychat-frontend/.angular/cache/
+/easychat-frontend/.angular/*
+/easychat-frontend/.cache
+/easychat-frontend/.sass-cache
+/easychat-backend/.cache
