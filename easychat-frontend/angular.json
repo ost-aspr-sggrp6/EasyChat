@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "chatify-frontend": {
+    "easychat-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/chatify-frontend",
+            "outputPath": "dist/easychat-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -62,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "chatify-frontend:build:production"
+              "buildTarget": "easychat-frontend:build:production"
             },
             "development": {
-              "buildTarget": "chatify-frontend:build:development"
+              "buildTarget": "easychat-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "chatify-frontend:build"
+            "buildTarget": "easychat-frontend:build"
           }
         },
         "test": {
