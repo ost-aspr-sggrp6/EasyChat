@@ -1,14 +1,4 @@
-<easychat-header>Mein Header</easychat-header>
-<main>
-  <input [(ngModel)]="message" placeholder="Nachricht schreiben..."/>
-  <button (click)="send()">Senden</button>
-
-  <h3>Empfangene Nachrichten:</h3>
-  <ul>
-    @for (msg of messages; track msg) {
-      <li>{{ msg }}</li>
-    }
-  </ul>
+<easychat-navigation />
+<main class="content">
   <ng-content></ng-content>
 </main>
-<easychat-footer>Mein Footer</easychat-footer>

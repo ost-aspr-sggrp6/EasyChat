@@ -1,5 +1,8 @@
 import { Routes } from '@angular/router';
+import {ChatComponent} from "@features/chat/chat.component";
 
 export const routes: Routes = [
-  // { path: '', component: HomeComponent}
+  { path: '', redirectTo: '/chat', pathMatch: 'full' },
+  { path: 'chat', component: ChatComponent },
+  { path: '**', redirectTo: '/chat' } // Fallback für unbekannte Routen
 ];

@@ -1,0 +1,9 @@
+@import "primeicons/primeicons.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@plugin "tailwindcss-primeui";
+
+html, body, easychat-root { height: 100%; }

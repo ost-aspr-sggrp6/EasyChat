@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  height: 100%;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+easychat-navigation {
+  height: 100%;
+  flex-shrink: 0;
+  background-color: var(--p-surface-ground);
+}

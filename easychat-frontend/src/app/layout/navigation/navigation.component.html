@@ -1,1 +1,41 @@
-<p>navigation works!</p>
+<!-- src/app/sidenav/sidenav.component.html -->
+<aside class="sidenav" [class.is-collapsed]="collapsed" aria-label="Side Navigation">
+  <p-button
+    [icon]="collapsed ? 'pi pi-angle-double-right' : 'pi pi-angle-double-left'"
+    [rounded]="true"
+    [text]="true"
+    class="sidenav__collapse"
+    (onClick)="toggle()"
+    [attr.aria-expanded]="!collapsed"
+    aria-label="Toggle sidebar">
+  </p-button>
+  <p-button
+    [icon]="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'"
+    [rounded]="true"
+    [text]="true"
+    class="sidenav__collapse"
+    (onClick)="toggleDarkMode()"
+    [ariaLabel]="isDarkMode ? 'Light Mode aktivieren' : 'Dark Mode aktivieren'"
+    [title]="isDarkMode ? 'Light Mode' : 'Dark Mode'"
+  ></p-button>
+
+  <nav class="sidenav__nav" role="navigation">
+    <!-- Router-Links -->
+    <a
+      *ngFor="let item of items; trackBy: trackById"
+      class="sidenav__item"
+      [routerLink]="item.routerLink || null"
+      routerLinkActive="is-active"
+      [attr.href]="item.routerLink ? null : item.href || null"
+      [attr.target]="item.target || null"
+      [attr.rel]="item.target === '_blank' ? 'noopener noreferrer' : null"
+      [attr.aria-label]="item.ariaLabel || item.label">
+
+      <i class="icon pi" [ngClass]="item.icon" aria-hidden="true"></i>
+      <span class="label">{{ item.label }}</span>
+
+      <!-- optionales Badge rechts vom Label (nur wenn expanded sichtbar) -->
+      <span class="badge" *ngIf="item.badge as b">{{ b }}</span>
+    </a>
+  </nav>
+</aside>
