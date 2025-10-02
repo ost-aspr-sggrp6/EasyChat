@@ -121,6 +121,14 @@ $dur: 240ms;
   display: none;
 }
 
+// navigation.component.scss
+.sidenav.is-collapsed .flex {
+  justify-content: center;
+}
+.sidenav.is-collapsed .flex .pi {
+  margin: 0; // entfernt evtl. vorhandene Abstände
+}
+
 .sidenav__item:focus-visible {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;

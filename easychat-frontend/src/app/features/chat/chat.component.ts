@@ -8,6 +8,7 @@ import {StyleClassModule} from "primeng/styleclass";
 import {CardModule} from "primeng/card";
 import {MessageListComponent} from "@features/message-list/message-list.component";
 import {MessageInputComponent} from "@features/message-input/message-input.component";
+import {ChatMessage} from "@features/chat/chat.interface";
 
 @Component({
   selector: 'easychat-chat',
@@ -26,20 +27,26 @@ import {MessageInputComponent} from "@features/message-input/message-input.compo
 })
 export class ChatComponent implements OnInit {
   message = '';
-  messages: string[] = [];
+  messages: ChatMessage[] = [];
 
   private socketService = inject(SocketService);
 
   ngOnInit(): void {
+    // Historie laden
+    this.socketService.onHistory().subscribe((history: ChatMessage[]) => {
+      console.log('Chat history loaded:', history);
+      this.messages = history;
+    });
+
     // Eingehende Nachrichten vom Server abonnieren
-    this.socketService.onMessage().subscribe((msg: string) => {
-      console.log('Received message:', msg);
+    this.socketService.onMessage().subscribe((msg: ChatMessage) => {
+      console.log('Received message:', msg.message);
       this.messages.push(msg);
     });
   }
 
   send(message: string): void {
-    console.log('Sending message:', message);
     this.socketService.sendMessage(message);
+    this.message = ''; // Eingabefeld leeren
   }
 }

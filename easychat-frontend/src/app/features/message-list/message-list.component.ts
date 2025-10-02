@@ -1,21 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {ChatMessage} from "@features/chat/chat.interface";
 
 @Component({
   selector: 'easychat-message-list',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="message-list">
-      <h3>Empfangene Nachrichten:</h3>
-      <ul>
-        @for (msg of messages; track msg) {
-          <li>{{ msg }}</li>
-        }
-      </ul>
-    </div>
-  `
+  templateUrl: './message-list.component.html',
+  styleUrl: './message-list.component.scss'
 })
 export class MessageListComponent {
-  @Input() messages: string[] = [];
+  @Input() messages: ChatMessage[] = [];
 }

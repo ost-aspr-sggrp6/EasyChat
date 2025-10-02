@@ -9,15 +9,6 @@
     [attr.aria-expanded]="!collapsed"
     aria-label="Toggle sidebar">
   </p-button>
-  <p-button
-    [icon]="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'"
-    [rounded]="true"
-    [text]="true"
-    class="sidenav__collapse"
-    (onClick)="toggleDarkMode()"
-    [ariaLabel]="isDarkMode ? 'Light Mode aktivieren' : 'Dark Mode aktivieren'"
-    [title]="isDarkMode ? 'Light Mode' : 'Dark Mode'"
-  ></p-button>
 
   <nav class="sidenav__nav" role="navigation">
     <!-- Router-Links -->
@@ -38,4 +29,61 @@
       <span class="badge" *ngIf="item.badge as b">{{ b }}</span>
     </a>
   </nav>
+
+  <div class="py-2 border-t">
+    <ul class="p-2 animate-duration-150 overflow-hidden">
+      <li>
+        <a
+          class="flex items-center cursor-pointer p-3 gap-2 rounded-lg hover:bg-primary-emphasis transition-colors duration-150"
+          (click)="toggleDarkMode()"
+          [attr.aria-label]="isDarkMode ? 'Light Mode aktivieren' : 'Dark Mode aktivieren'"
+          [attr.title]="isDarkMode ? 'Light Mode' : 'Dark Mode'"
+        >
+          <i class="pi" [ngClass]="isDarkMode ? 'pi-sun' : 'pi-moon'"></i>
+          <span *ngIf="!collapsed">{{ isDarkMode ? 'Light' : 'Dark' }}</span>
+        </a>
+      </li>
+      <li>
+        <a class="flex items-center cursor-pointer p-3 gap-2 rounded-lg hover:bg-primary-emphasis transition-colors duration-150"
+           (click)="showDialog()">
+          <i class="pi pi-cog"></i>
+          <span *ngIf="!collapsed">Settings</span>
+        </a>
+      </li>
+      <li>
+        <a class="flex items-center cursor-pointer p-3 gap-2 rounded-lg hover:bg-primary-emphasis transition-colors duration-150">
+          <i class="pi pi-sign-out"></i>
+          <span *ngIf="!collapsed">Sign Out</span>
+        </a>
+      </li>
+    </ul>
+    <a
+      pStyleClass="@prev"
+      enterFromClass="hidden"
+      enterActiveClass="animate-slidedown"
+      leaveToClass="hidden"
+      leaveActiveClass="animate-slideup"
+      class="flex items-center cursor-pointer p-2 gap-2"
+    >
+      <img src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/avatar-amyels.png" class="w-8 h-8 rounded-full" />
+      <span *ngIf="!collapsed">Amy Elsner</span>
+      <i *ngIf="!collapsed" class="pi pi-angle-up  ml-auto"></i>
+    </a>
+  </div>
 </aside>
+
+<p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+  <span class="p-text-secondary block mb-8">Update your information.</span>
+  <div class="flex items-center gap-4 mb-4">
+    <label for="username" class="font-semibold w-24">Username</label>
+    <input pInputText id="username" class="flex-auto" autocomplete="off" />
+  </div>
+  <div class="flex items-center gap-4 mb-8">
+    <label for="email" class="font-semibold w-24">Email</label>
+    <input pInputText id="email" class="flex-auto" autocomplete="off" />
+  </div>
+  <div class="flex justify-end gap-2">
+    <p-button label="Cancel" severity="secondary" (click)="visible = false" />
+    <p-button label="Save" (click)="visible = false" />
+  </div>
+</p-dialog>

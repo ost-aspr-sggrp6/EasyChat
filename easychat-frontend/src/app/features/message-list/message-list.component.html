@@ -1,1 +1,20 @@
-<p>message-list works!</p>
+<div class="message-list">
+  <div class="design-header p-2 my-2">
+    <h3>Empfangene Nachrichten:</h3>
+  </div>
+  <ul>
+    @for (msg of messages; track msg._id) {
+      <li>
+        <div class="message-header">
+          <span class="user">👤 {{ msg.userId }}</span>
+          <span class="timestamp">
+            {{ msg.timestamp | date:'short' }}
+          </span>
+        </div>
+        <div class="message-body">
+          {{ msg.message }}
+        </div>
+      </li>
+    }
+  </ul>
+</div>
