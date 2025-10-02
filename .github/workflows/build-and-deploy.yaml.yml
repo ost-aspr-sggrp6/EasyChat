@@ -31,6 +31,6 @@ jobs:
       - name: Build and push backend
         uses: docker/build-push-action@v6
         with:
-          context: ./easychat-backend/docker
+          context: ./easychat-backend
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/easychat-backend:latest
