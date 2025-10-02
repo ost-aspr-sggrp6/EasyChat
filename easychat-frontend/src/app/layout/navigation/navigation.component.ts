@@ -5,14 +5,17 @@ import { RippleModule } from 'primeng/ripple';
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {NAV_ITEMS} from "./navigation-items";
 import {NavItem} from "./nav-item.model";
-import {RouterLink, RouterLinkActive} from "@angular/router";      // für Click-Effekt
+import {RouterLink, RouterLinkActive} from "@angular/router";
 import {Dialog} from 'primeng/dialog';
-import {InputText} from "primeng/inputtext";
+import {LanguageService} from "@core/language/language.service";
+import {SharedModule} from "@shared/shared.module";
+import {SelectModule} from "primeng/select";
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
   selector: 'easychat-navigation',
   standalone: true,
-  imports: [ButtonModule, RippleModule, StyleClassModule, NgClass, RouterLink, RouterLinkActive, NgForOf, NgIf, Dialog, InputText],
+  imports: [ButtonModule, RippleModule, StyleClassModule, NgClass, RouterLink, RouterLinkActive, NgForOf, NgIf, Dialog, SelectModule, SharedModule, TranslatePipe],
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
@@ -24,19 +27,25 @@ export class NavigationComponent {
 
   visible = false;
 
-  profileLinks = [
-    { label: 'Profile', icon: 'pi-user', routerLink: '/profile' },
-    { label: 'Settings', icon: 'pi-cog', routerLink: '/settings' },
-    { label: 'Sign Out', icon: 'pi-sign-out', href: '/logout' }
-  ];
-
-  user = {
-    name: 'Amy Elsner',
-    avatarUrl: 'https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/avatar-amyels.png'
-  };
-
   toggle() { this.collapsed = !this.collapsed; }
 
+  languages = [
+    { name: 'English', code: 'en' },
+    { name: 'Deutsch', code: 'de' },
+    { name: 'Français', code: 'fr' }
+  ];
+
+  selectedLanguage = 'en';
+
+  constructor(private languageService: LanguageService) {
+    this.languageService.language$.subscribe(lang => {
+      this.selectedLanguage = lang;
+    });
+  }
+
+  onLanguageChange(lang: string) {
+    this.languageService.use(lang);
+  }
 
   toggleDarkMode() {
     const element = document.querySelector('html');

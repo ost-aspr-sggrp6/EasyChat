@@ -54,10 +54,12 @@ export const EasychatPreset = definePreset(Lara, {
   css: ({ dt }) => `
     :root {
       --p-surface-ground: ${dt('surface.50')};
+      --p-surface-ground-2: ${dt('surface.100')};
       --p-surface-card:   ${dt('surface.0')};
     }
     .easychat-dark-mode {
       --p-surface-ground: ${dt('surface.900')};
+      --p-surface-ground-2: ${dt('surface.950')};
       --p-surface-card:   ${dt('surface.800')};
     }
   `

@@ -1,6 +1,6 @@
 <div class="message-list">
   <div class="design-header p-2 my-2">
-    <h3>Empfangene Nachrichten:</h3>
+    <h3>{{ 'RECEIVED_MESSAGES' | translate }}</h3>
   </div>
   <ul>
     @for (msg of messages; track msg._id) {

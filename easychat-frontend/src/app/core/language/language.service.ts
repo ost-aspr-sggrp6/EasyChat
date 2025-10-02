@@ -8,7 +8,8 @@ export class LanguageService {
 
   constructor(private translate: TranslateService) {
     // Falls Sprache im localStorage liegt, laden
-    const savedLang = localStorage.getItem('lang') || 'en';
+    // const savedLang = localStorage.getItem('lang') || 'en';
+    const savedLang = 'en';
     this.use(savedLang);
   }
 

@@ -14,7 +14,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     FormsModule,
     ButtonModule,
     InputTextModule,
-    ToolbarModule,
+    ToolbarModule
   ],
   declarations: [],
   exports: [

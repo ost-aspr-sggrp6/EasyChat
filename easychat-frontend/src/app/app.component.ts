@@ -23,11 +23,11 @@ export class AppComponent implements OnInit {
   constructor(private languageService: LanguageService, private keycloakService: KeycloakService) {}
 
   async ngOnInit(): Promise<void> {
-    try {
-      this.userProfile = await this.keycloakService.loadUserProfile();
-    } catch (err) {
-      console.error('Fehler beim Laden des Benutzerprofils', err);
-    }
+    // try {
+    //   this.userProfile = await this.keycloakService.loadUserProfile();
+    // } catch (err) {
+    //   console.error('Fehler beim Laden des Benutzerprofils', err);
+    // }
   }
 
   switchLanguage(lang: string) {

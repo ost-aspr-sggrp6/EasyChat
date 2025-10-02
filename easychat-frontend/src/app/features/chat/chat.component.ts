@@ -34,7 +34,6 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     // Historie laden
     this.socketService.onHistory().subscribe((history: ChatMessage[]) => {
-      console.log('Chat history loaded:', history);
       this.messages = history;
     });
 

@@ -1,4 +1,22 @@
 {
   "HELLO": "Hello World",
-  "LOGIN": "Login"
+  "LOGIN": "Login",
+  "RECEIVED_MESSAGES": "Received Message:",
+  "SETTINGS": {
+    "LANGUAGE": "language",
+    "SELECT_LANGUAGE": "Change language",
+    "CANCEL": "Cancel",
+    "SAVE": "save"
+  },
+  "SIDENAV": {
+    "BROADCAST": "Broadcast",
+    "TOGGLE": "Sidebar toggle",
+    "LIGHT": "Light",
+    "DARK": "Dark",
+    "LIGHT_MODE": "Light Mode",
+    "DARK_MODE": "Dark Mode",
+    "SETTINGS": "Settings",
+    "SIGN_OUT": "Logout",
+    "USER": "Amy Elsner"
+  }
 }

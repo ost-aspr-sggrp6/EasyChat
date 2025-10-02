@@ -1,4 +1,22 @@
 {
   "HELLO": "Hallo Welt",
-  "LOGIN": "Anmelden"
+  "LOGIN": "Anmelden",
+  "RECEIVED_MESSAGES": "Empfangene Nachrichten:",
+  "SETTINGS": {
+    "LANGUAGE": "Sprache",
+    "SELECT_LANGUAGE": "Sprache wählen",
+    "CANCEL": "Abbrechen",
+    "SAVE": "Speichern"
+  },
+  "SIDENAV": {
+    "BROADCAST": "Rundfunk",
+    "TOGGLE": "Sidebar umschalten",
+    "LIGHT": "Hell",
+    "DARK": "Dunkel",
+    "LIGHT_MODE": "Light Mode",
+    "DARK_MODE": "Dark Mode",
+    "SETTINGS": "Einstellungen",
+    "SIGN_OUT": "Abmelden",
+    "USER": "Amy Elsner"
+  }
 }

@@ -7,7 +7,7 @@
     class="sidenav__collapse"
     (onClick)="toggle()"
     [attr.aria-expanded]="!collapsed"
-    aria-label="Toggle sidebar">
+    [attr.aria-label]="'SIDENAV.TOGGLE' | translate">
   </p-button>
 
   <nav class="sidenav__nav" role="navigation">
@@ -23,7 +23,7 @@
       [attr.aria-label]="item.ariaLabel || item.label">
 
       <i class="icon pi" [ngClass]="item.icon" aria-hidden="true"></i>
-      <span class="label">{{ item.label }}</span>
+      <span class="label">{{ item.label | translate }}</span>
 
       <!-- optionales Badge rechts vom Label (nur wenn expanded sichtbar) -->
       <span class="badge" *ngIf="item.badge as b">{{ b }}</span>
@@ -40,20 +40,20 @@
           [attr.title]="isDarkMode ? 'Light Mode' : 'Dark Mode'"
         >
           <i class="pi" [ngClass]="isDarkMode ? 'pi-sun' : 'pi-moon'"></i>
-          <span *ngIf="!collapsed">{{ isDarkMode ? 'Light' : 'Dark' }}</span>
+          <span *ngIf="!collapsed">{{ isDarkMode ? ('SIDENAV.LIGHT' | translate) : ('SIDENAV.DARK' | translate) }}</span>
         </a>
       </li>
       <li>
         <a class="flex items-center cursor-pointer p-3 gap-2 rounded-lg hover:bg-primary-emphasis transition-colors duration-150"
            (click)="showDialog()">
           <i class="pi pi-cog"></i>
-          <span *ngIf="!collapsed">Settings</span>
+          <span *ngIf="!collapsed">{{ 'SIDENAV.SETTINGS' | translate }}</span>
         </a>
       </li>
       <li>
         <a class="flex items-center cursor-pointer p-3 gap-2 rounded-lg hover:bg-primary-emphasis transition-colors duration-150">
           <i class="pi pi-sign-out"></i>
-          <span *ngIf="!collapsed">Sign Out</span>
+          <span *ngIf="!collapsed">{{ 'SIDENAV.SIGN_OUT' | translate }}</span>
         </a>
       </li>
     </ul>
@@ -66,24 +66,29 @@
       class="flex items-center cursor-pointer p-2 gap-2"
     >
       <img src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/avatar-amyels.png" class="w-8 h-8 rounded-full" />
-      <span *ngIf="!collapsed">Amy Elsner</span>
+      <span *ngIf="!collapsed">{{ 'SIDENAV.USER' | translate }}</span>
       <i *ngIf="!collapsed" class="pi pi-angle-up  ml-auto"></i>
     </a>
   </div>
 </aside>
 
-<p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
-  <span class="p-text-secondary block mb-8">Update your information.</span>
+<p-dialog header="Settings" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem', height: '20rem'}">
   <div class="flex items-center gap-4 mb-4">
-    <label for="username" class="font-semibold w-24">Username</label>
-    <input pInputText id="username" class="flex-auto" autocomplete="off" />
-  </div>
-  <div class="flex items-center gap-4 mb-8">
-    <label for="email" class="font-semibold w-24">Email</label>
-    <input pInputText id="email" class="flex-auto" autocomplete="off" />
+    <label for="language" class="font-semibold w-24">{{ 'SETTINGS.LANGUAGE' | translate }}</label>
+    <p-select
+      id="language"
+      class="flex-auto"
+      [options]="languages"
+      [(ngModel)]="selectedLanguage"
+      (onChange)="onLanguageChange($event.value)"
+      optionLabel="name"
+      optionValue="code"
+      [placeholder]="'SETTINGS.SELECT_LANGUAGE' | translate"
+      appendTo="body"
+    ></p-select>
   </div>
   <div class="flex justify-end gap-2">
-    <p-button label="Cancel" severity="secondary" (click)="visible = false" />
-    <p-button label="Save" (click)="visible = false" />
+    <p-button [label]="'SETTINGS.CANCEL' | translate"  severity="secondary" (click)="visible = false" />
+    <p-button [label]="'SETTINGS.SAVE' | translate" (click)="visible = false" />
   </div>
 </p-dialog>
