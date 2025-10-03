@@ -1,1 +1,14 @@
-<p>message-input works!</p>
+<div class="message-input">
+  <input
+    type="text"
+    pInputText
+    [(ngModel)]="message"
+    placeholder="Nachricht schreiben..."
+    (keyup.enter)="sendMessage()"
+    class="flex-1">
+  <p-button
+    label="Senden"
+    (onClick)="sendMessage()"
+    [disabled]="!message.trim()">
+  </p-button>
+</div>

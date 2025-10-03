@@ -7,6 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToolbarModule } from 'primeng/toolbar';
+import {BadgeModule} from "primeng/badge";
+import {StyleClassModule} from "primeng/styleclass";
+import {CardModule} from "primeng/card";
+import {RippleModule} from "primeng/ripple";
+import {SelectModule} from "primeng/select";
+import {Dialog} from "primeng/dialog";
 
 @NgModule({
   imports: [
@@ -14,7 +20,13 @@ import { ToolbarModule } from 'primeng/toolbar';
     FormsModule,
     ButtonModule,
     InputTextModule,
-    ToolbarModule
+    ToolbarModule,
+    BadgeModule,
+    StyleClassModule,
+    CardModule,
+    RippleModule,
+    SelectModule,
+    Dialog,
   ],
   declarations: [],
   exports: [
@@ -23,6 +35,12 @@ import { ToolbarModule } from 'primeng/toolbar';
     ButtonModule,
     InputTextModule,
     ToolbarModule,
+    BadgeModule,
+    StyleClassModule,
+    CardModule,
+    RippleModule,
+    SelectModule,
+    Dialog
   ]
 })
 export class SharedModule {}

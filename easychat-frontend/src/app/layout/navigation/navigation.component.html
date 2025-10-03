@@ -1,33 +1,25 @@
-<!-- src/app/sidenav/sidenav.component.html -->
-<aside class="sidenav" [class.is-collapsed]="collapsed" aria-label="Side Navigation">
+<aside class="sidenav" [class.is-collapsed]="collapsed">
   <p-button
     [icon]="collapsed ? 'pi pi-angle-double-right' : 'pi pi-angle-double-left'"
     [rounded]="true"
     [text]="true"
     class="sidenav__collapse"
-    (onClick)="toggle()"
-    [attr.aria-expanded]="!collapsed"
-    [attr.aria-label]="'SIDENAV.TOGGLE' | translate">
+    (onClick)="toggleCollapse()"
+    [attr.aria-expanded]="!collapsed">
   </p-button>
 
   <nav class="sidenav__nav" role="navigation">
-    <!-- Router-Links -->
-    <a
-      *ngFor="let item of items; trackBy: trackById"
-      class="sidenav__item"
-      [routerLink]="item.routerLink || null"
-      routerLinkActive="is-active"
-      [attr.href]="item.routerLink ? null : item.href || null"
-      [attr.target]="item.target || null"
-      [attr.rel]="item.target === '_blank' ? 'noopener noreferrer' : null"
-      [attr.aria-label]="item.ariaLabel || item.label">
-
-      <i class="icon pi" [ngClass]="item.icon" aria-hidden="true"></i>
-      <span class="label">{{ item.label | translate }}</span>
-
-      <!-- optionales Badge rechts vom Label (nur wenn expanded sichtbar) -->
-      <span class="badge" *ngIf="item.badge as b">{{ b }}</span>
-    </a>
+    @for (item of items; track item.id) {
+      <a
+        class="sidenav__item"
+        [routerLink]="item.routerLink || null"
+        routerLinkActive="is-active">
+        <i class="icon pi" [ngClass]="item.icon" aria-hidden="true"></i>
+        @if (!collapsed) {
+          <span class="label">{{ item.label | translate }}</span>
+        }
+      </a>
+    }
   </nav>
 
   <div class="py-2 border-t">
@@ -35,25 +27,31 @@
       <li>
         <a
           class="flex items-center cursor-pointer p-3 gap-2 rounded-lg hover:bg-primary-emphasis transition-colors duration-150"
-          (click)="toggleDarkMode()"
+          (click)="toggleTheme()"
           [attr.aria-label]="isDarkMode ? 'Light Mode aktivieren' : 'Dark Mode aktivieren'"
           [attr.title]="isDarkMode ? 'Light Mode' : 'Dark Mode'"
         >
           <i class="pi" [ngClass]="isDarkMode ? 'pi-sun' : 'pi-moon'"></i>
-          <span *ngIf="!collapsed">{{ isDarkMode ? ('SIDENAV.LIGHT' | translate) : ('SIDENAV.DARK' | translate) }}</span>
+          @if (!collapsed) {
+            <span>{{ isDarkMode ? ('SIDENAV.LIGHT' | translate) : ('SIDENAV.DARK' | translate) }}</span>
+          }
         </a>
       </li>
       <li>
         <a class="flex items-center cursor-pointer p-3 gap-2 rounded-lg hover:bg-primary-emphasis transition-colors duration-150"
            (click)="showDialog()">
           <i class="pi pi-cog"></i>
-          <span *ngIf="!collapsed">{{ 'SIDENAV.SETTINGS' | translate }}</span>
+          @if (!collapsed) {
+            <span>{{ 'SIDENAV.SETTINGS' | translate }}</span>
+          }
         </a>
       </li>
       <li>
         <a class="flex items-center cursor-pointer p-3 gap-2 rounded-lg hover:bg-primary-emphasis transition-colors duration-150">
           <i class="pi pi-sign-out"></i>
-          <span *ngIf="!collapsed">{{ 'SIDENAV.SIGN_OUT' | translate }}</span>
+          @if (!collapsed) {
+            <span>{{ 'SIDENAV.SIGN_OUT' | translate }}</span>
+          }
         </a>
       </li>
     </ul>
@@ -66,8 +64,10 @@
       class="flex items-center cursor-pointer p-2 gap-2"
     >
       <img src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/avatar-amyels.png" class="w-8 h-8 rounded-full" />
-      <span *ngIf="!collapsed">{{ 'SIDENAV.USER' | translate }}</span>
-      <i *ngIf="!collapsed" class="pi pi-angle-up  ml-auto"></i>
+      @if (!collapsed) {
+        <span>{{ 'SIDENAV.USER' | translate }}</span>
+        <i class="pi pi-angle-up  ml-auto"></i>
+      }
     </a>
   </div>
 </aside>
@@ -79,8 +79,8 @@
       id="language"
       class="flex-auto"
       [options]="languages"
-      [(ngModel)]="selectedLanguage"
-      (onChange)="onLanguageChange($event.value)"
+      [ngModel]="selectedLanguage$ | async"
+      (onChange)="changeLanguage($event.value)"
       optionLabel="name"
       optionValue="code"
       [placeholder]="'SETTINGS.SELECT_LANGUAGE' | translate"

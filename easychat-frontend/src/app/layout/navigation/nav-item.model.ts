@@ -1,4 +1,3 @@
-// src/app/types/nav-item.model.ts
 export interface NavItem {
   /** Iconklasse ohne führendes 'pi ' — z.B. 'pi-home' */
   icon: string;

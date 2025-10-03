@@ -1,6 +1,6 @@
 export interface ChatMessage {
-  _id?: string;       // kommt von MongoDB
+  _id?: string;
   userId: string;
   message: string;
-  timestamp: string;  // als ISO-String von MongoDB
+  timestamp: string;
 }

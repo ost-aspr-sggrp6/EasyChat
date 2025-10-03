@@ -1,20 +1,16 @@
-/* src/app/chat/chat.component.scss */
 :host {
-  /* füllt den Rest im Content-Bereich */
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;   /* why: soll restliche Fläche einnehmen */
+  flex: 1 1 auto;
   height: 100%;
 }
 
-/* Liste füllt den Rest und scrollt */
 :host > easychat-message-list {
   flex: 1 1 auto;
-  min-height: 0;    /* crucial für Scroll statt Overflow */
+  min-height: 0;
   overflow: auto;
 }
 
-/* Input bleibt unten */
 :host > easychat-message-input {
   flex: 0 0 auto;
   margin-top: 12px;

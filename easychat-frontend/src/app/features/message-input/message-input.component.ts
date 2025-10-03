@@ -1,35 +1,13 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
+import { SharedModule } from "@shared/shared.module";
 
 @Component({
   selector: 'easychat-message-input',
   standalone: true,
-  imports: [FormsModule, ButtonModule, InputTextModule],
-  template: `
-    <div class="message-input">
-      <input
-        type="text"
-        pInputText
-        [(ngModel)]="message"
-        placeholder="Nachricht schreiben..."
-        (keyup.enter)="sendMessage()"
-        class="flex-1">
-      <p-button
-        label="Senden"
-        (onClick)="sendMessage()"
-        [disabled]="!message.trim()">
-      </p-button>
-    </div>
-  `,
-  styles: [`
-    .message-input {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-    }
-  `]})
+  imports: [SharedModule],
+  templateUrl: 'message-input.component.html',
+  styleUrl: 'message-input.component.scss'
+})
 export class MessageInputComponent {
   message = '';
   @Output() messageSent = new EventEmitter<string>();

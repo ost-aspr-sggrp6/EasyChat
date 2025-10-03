@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { environment } from '@environment/environment';
 import {ChatMessage} from "@features/chat/chat.interface";
 
 @Injectable({
@@ -26,7 +26,6 @@ export class SocketService implements OnDestroy {
     });
   }
 
-  // Chat-Historie empfangen
   onHistory(): Observable<ChatMessage[]> {
     return new Observable((subscriber) => {
       this.socket.on('chatHistory', (history: ChatMessage[]) => {
@@ -35,7 +34,6 @@ export class SocketService implements OnDestroy {
     });
   }
 
-  // Verbindung schließen, wenn Service zerstört wird
   ngOnDestroy(): void {
     this.socket.disconnect();
   }
