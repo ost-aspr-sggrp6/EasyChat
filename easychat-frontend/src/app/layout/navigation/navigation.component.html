@@ -46,14 +46,28 @@
           }
         </a>
       </li>
-      <li>
-        <a class="flex items-center cursor-pointer p-3 gap-2 rounded-lg hover:bg-primary-emphasis transition-colors duration-150">
-          <i class="pi pi-sign-out"></i>
-          @if (!collapsed) {
-            <span>{{ 'SIDENAV.SIGN_OUT' | translate }}</span>
-          }
-        </a>
-      </li>
+      @if (!keycloak.authenticated) {
+        <li>
+          <a (click)="login()"
+             class="flex items-center cursor-pointer p-3 gap-2 rounded-lg hover:bg-primary-emphasis transition-colors duration-150">
+            <i class="pi pi-sign-out"></i>
+            @if (!collapsed) {
+              <span>{{ 'SIDENAV.SIGN_IN' | translate }}</span>
+            }
+          </a>
+        </li>
+      }
+      @if (keycloak.authenticated) {
+        <li>
+          <a (click)="logout()"
+             class="flex items-center cursor-pointer p-3 gap-2 rounded-lg hover:bg-primary-emphasis transition-colors duration-150">
+            <i class="pi pi-sign-out"></i>
+            @if (!collapsed) {
+              <span>{{ 'SIDENAV.SIGN_OUT' | translate }}</span>
+            }
+          </a>
+        </li>
+      }
     </ul>
     <a
       pStyleClass="@prev"
@@ -65,7 +79,7 @@
     >
       <img src="https://fqjltiegiezfetthbags.supabase.co/storage/v1/render/image/public/block.images/blocks/avatars/avatar-amyels.png" class="w-8 h-8 rounded-full" />
       @if (!collapsed) {
-        <span>{{ 'SIDENAV.USER' | translate }}</span>
+        <span>{{ (userProfile$ | async)?.username }}</span>
         <i class="pi pi-angle-up  ml-auto"></i>
       }
     </a>

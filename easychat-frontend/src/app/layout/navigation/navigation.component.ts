@@ -5,6 +5,7 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
 import {LanguageService} from "@core/language/language.service";
 import {SharedModule} from "@shared/shared.module";
 import {TranslatePipe} from "@ngx-translate/core";
+import Keycloak from "keycloak-js";
 
 @Component({
   selector: 'easychat-navigation',
@@ -15,9 +16,12 @@ import {TranslatePipe} from "@ngx-translate/core";
 })
 export class NavigationComponent {
   private readonly languageService = inject(LanguageService);
+  protected readonly keycloak = inject(Keycloak);
 
   @Input() collapsed = false;
 
+
+  userProfile$ = this.keycloak.loadUserProfile();
   readonly items: NavItem[] = NAV_ITEMS;
   readonly languages = [
     { name: 'English', code: 'en' },
@@ -29,6 +33,14 @@ export class NavigationComponent {
 
   isDarkMode = false;
   visible = false;
+
+  login() {
+    this.keycloak.login();
+  }
+
+  logout() {
+    this.keycloak.logout(); // Redirect back to app after logout
+  }
 
   toggleCollapse(): void {
     this.collapsed = !this.collapsed;
