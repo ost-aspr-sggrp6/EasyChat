@@ -1,2 +1,20 @@
 <easychat-message-list [messages]="messages" [currentUserId]="currentUserId">></easychat-message-list>
 <easychat-message-input (messageSent)="send($event)"></easychat-message-input>
+
+<p-dialog
+  header="Choose a Username"
+  [(visible)]="guestDialogVisible"
+  [modal]="true"
+  [closable]="false">
+
+  <div class="flex flex-col gap-2">
+    <input pInputText
+           [(ngModel)]="guestNameInput"
+           placeholder="Enter a username" />
+    <p-button
+      label="Confirm"
+      (click)="confirmGuestName()"
+      [disabled]="!guestNameInput.trim()" />
+  </div>
+
+</p-dialog>

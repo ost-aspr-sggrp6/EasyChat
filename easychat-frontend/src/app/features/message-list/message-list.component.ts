@@ -14,5 +14,9 @@ export class MessageListComponent {
   @Input() currentUserId!: string | undefined;
   @Input() messages: ChatMessage[] = [];
 
+  avatarStyle: string = 'avataaars-neutral';
 
+  getAvatarUrl(seed: string | undefined): string {
+    return `https://api.dicebear.com/9.x/${this.avatarStyle}/svg?seed=${encodeURIComponent(seed || 'unknown')}`;
+  }
 }

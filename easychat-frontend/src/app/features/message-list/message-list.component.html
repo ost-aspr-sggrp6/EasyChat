@@ -8,14 +8,15 @@
         class="message-container"
         [ngClass]="{ 'own-message': msg.user?.id === currentUserId }">
 
-<!--        @if (msg.user?.id !== currentUserId) {-->
-<!--          <img class="avatar" src="assets/avatars/{{ msg.user?.id }}.png" alt="avatar" />-->
-<!--        }-->
+        @if (msg.user?.id !== currentUserId) {
+          <img class="avatar"
+               [src]="getAvatarUrl(msg.user?.username || msg.user?.id)"
+               alt="avatar" />
+        }
 
         <div class="message-body">
           <span class="text">{{ msg.message }}</span>
           <br>
-          <span class="text username">{{ msg.userId }}</span>
           <span class="timestamp">{{ msg.timestamp | date:'shortTime' }}</span>
         </div>
 

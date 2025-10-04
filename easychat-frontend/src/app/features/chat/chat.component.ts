@@ -25,6 +25,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   targetId: string | null = null;
   currentUserId: string | undefined;
   currentUsername: string | undefined;
+  guestDialogVisible = false;
+  guestNameInput = '';
 
   async ngOnInit(): Promise<void> {
     // ✅ Load user profile first if authenticated
@@ -32,6 +34,15 @@ export class ChatComponent implements OnInit, OnDestroy {
       const profile = await this.keycloak.loadUserProfile();
       this.currentUserId = profile?.id;
       this.currentUsername = profile?.username;
+    } else {
+      const savedGuestName = localStorage.getItem('guestName');
+      if (!savedGuestName) {
+        this.guestDialogVisible = true; // 👈 Dialog öffnen
+      } else {
+        // Vielleicht muss der unique sein???
+        this.currentUserId = 'guest-' + savedGuestName;
+        this.currentUsername = savedGuestName;
+      }
     }
 
     // ✅ Now safe to handle routing and socket setup
@@ -45,7 +56,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.socketService.onHistory()
       .pipe(takeUntil(this.destroy$))
       .subscribe((history) => {
-        console.log('Received history:', history);
         this.messages = history;
       });
 
@@ -90,6 +100,19 @@ export class ChatComponent implements OnInit, OnDestroy {
   send(message: string): void {
     this.socketService.sendMessage(
       message
+    );
+  }
+
+  confirmGuestName() {
+    this.currentUserId = 'guest-' + this.guestNameInput;
+    this.currentUsername = this.guestNameInput;
+    localStorage.setItem('guestName', this.guestNameInput);
+    this.guestDialogVisible = false;
+    // ✅ Update chat context after username is set
+    this.socketService.setChatContext(
+      this.chatType,
+      this.targetId,
+      { id: this.currentUserId, username: this.currentUsername ?? 'anonymous' }
     );
   }
 
