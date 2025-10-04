@@ -7,7 +7,7 @@ import {SharedModule} from "@shared/shared.module";
 import {TranslatePipe} from "@ngx-translate/core";
 import Keycloak from "keycloak-js";
 import {HttpClient} from "@angular/common/http";
-import {catchError, from, of, switchMap} from "rxjs";
+import {catchError, from, map, of, switchMap} from "rxjs";
 
 @Component({
   selector: 'easychat-navigation',
@@ -41,6 +41,15 @@ export class NavigationComponent {
     { name: 'Français', code: 'fr' }
   ];
 
+  filteredItems$ = of(this.keycloak.authenticated).pipe(
+    map(isLoggedIn =>
+      this.items.filter(item => {
+        if (item.requiresAuth && !isLoggedIn) return false; // Nur für eingeloggte User
+        return true;
+      })
+    )
+  );
+
   selectedLanguage$ = this.languageService.language$;
 
   isDarkMode = false;
@@ -51,7 +60,9 @@ export class NavigationComponent {
   }
 
   logout() {
-    this.keycloak.logout(); // Redirect back to app after logout
+    this.keycloak.logout({
+      redirectUri: window.location.origin // oder eine andere URL
+    });
   }
 
   toggleCollapse(): void {

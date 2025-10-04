@@ -8,9 +8,9 @@
         class="message-container"
         [ngClass]="{ 'own-message': msg.user?.id === currentUserId }">
 
-        @if (msg.user?.id !== currentUserId) {
-          <img class="avatar" src="assets/avatars/{{ msg.user?.id }}.png" alt="avatar" />
-        }
+<!--        @if (msg.user?.id !== currentUserId) {-->
+<!--          <img class="avatar" src="assets/avatars/{{ msg.user?.id }}.png" alt="avatar" />-->
+<!--        }-->
 
         <div class="message-body">
           <span class="text">{{ msg.message }}</span>

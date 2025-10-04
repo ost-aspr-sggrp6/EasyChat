@@ -15,4 +15,6 @@ export interface NavItem {
   badge?: string | number;
   /** Stabile id für trackBy; falls leer, wird label verwendet */
   id?: string;
+  requiresAuth?: boolean; // optional
+  match?: 'exact' | 'subset'; // neu
 }

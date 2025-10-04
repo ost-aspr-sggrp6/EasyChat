@@ -9,11 +9,15 @@
   </p-button>
 
   <nav class="sidenav__nav" role="navigation">
-    @for (item of items; track item.id) {
+    @for (item of filteredItems$ | async; track item.id) {
       <a
         class="sidenav__item"
-        [routerLink]="item.routerLink || null"
-        routerLinkActive="is-active">
+        [routerLink]="item.routerLink"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: item.match === 'exact' }"
+        #rla="routerLinkActive"
+        [attr.aria-current]="rla.isActive ? 'page' : null"
+      >
         <i class="icon pi" [ngClass]="item.icon" aria-hidden="true"></i>
         @if (!collapsed) {
           <span class="label">{{ item.label | translate }}</span>
@@ -48,7 +52,7 @@
         <li>
           <a (click)="login()"
              class="flex items-center cursor-pointer p-3 gap-2 rounded-lg hover:bg-primary-emphasis transition-colors duration-150">
-            <i class="pi pi-sign-out"></i>
+            <i class="pi pi-sign-in"></i>
             @if (!collapsed) {
               <span>{{ 'SIDENAV.SIGN_IN' | translate }}</span>
             }
