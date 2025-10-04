@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideKeycloak({
       config: {
-        url: 'http://localhost:8080/',
+        url: 'http://127.0.0.1:8080/',
         realm: 'easychat',
         clientId: 'easychat-frontend'
       },

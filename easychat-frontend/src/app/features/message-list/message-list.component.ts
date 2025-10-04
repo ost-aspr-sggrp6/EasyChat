@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ChatMessage} from "@features/chat/chat.interface";
 import {TranslatePipe} from "@ngx-translate/core";
 import {SharedModule} from "@shared/shared.module";
@@ -11,5 +11,8 @@ import {SharedModule} from "@shared/shared.module";
   styleUrl: './message-list.component.scss'
 })
 export class MessageListComponent {
+  @Input() currentUserId!: string | undefined;
   @Input() messages: ChatMessage[] = [];
+
+
 }

@@ -10,6 +10,7 @@
   },
   "SIDENAV": {
     "BROADCAST": "Broadcast",
+    "PRIVATE": "Private",
     "TOGGLE": "Sidebar toggle",
     "LIGHT": "Light",
     "DARK": "Dark",

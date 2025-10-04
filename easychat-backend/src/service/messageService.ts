@@ -1,9 +1,10 @@
 import MessageModel from "../schema/messageSchema";
 
 export class MessageService {
-    async saveMessage(userId: string, message: string) {
+    async saveMessage(room: string, user: { id: string; username: string }, message: string) {
         const chatMessage = new MessageModel({
-            userId,
+            room,
+            user,
             message,
             timestamp: new Date(),
         });
@@ -11,9 +12,9 @@ export class MessageService {
         return await chatMessage.save();
     }
 
-    async getRecentMessages(limit = 50) {
-        return MessageModel.find()
-            .sort({timestamp: -1})
+    async getRecentMessagesForRoom(room: string, limit = 50) {
+        return MessageModel.find({ room })
+            .sort({ timestamp: -1 })
             .limit(limit)
             .lean();
     }

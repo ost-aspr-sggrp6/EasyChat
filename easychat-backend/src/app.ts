@@ -5,6 +5,9 @@ import connectDB from "./config/database";
 import indexRouter from "./routes";
 import dotenv from "dotenv";
 
+const session = require('express-session');
+const { keycloak, memoryStore } = require('./config/keycloak');
+
 dotenv.config();
 connectDB();
 
@@ -13,6 +16,15 @@ const app: Application = express();
 
 const allowedOrigins = (process.env.CORS_ORIGINS || "http://localhost:4200")
     .split(",");
+
+app.use(session({
+    secret: 'some-secret',
+    resave: false,
+    saveUninitialized: true,
+    store: memoryStore
+}));
+
+app.use(keycloak.middleware());
 
 app.use(
   cors({
@@ -25,6 +37,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api", indexRouter);
+
+app.get('/protected', keycloak.protect(), (req, res) => {
+    res.send('You are authenticated!');
+});
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({ error: "Not Found" });

@@ -28,8 +28,6 @@
         <a
           class="flex items-center cursor-pointer p-3 gap-2 rounded-lg hover:bg-primary-emphasis transition-colors duration-150"
           (click)="toggleTheme()"
-          [attr.aria-label]="isDarkMode ? 'Light Mode aktivieren' : 'Dark Mode aktivieren'"
-          [attr.title]="isDarkMode ? 'Light Mode' : 'Dark Mode'"
         >
           <i class="pi" [ngClass]="isDarkMode ? 'pi-sun' : 'pi-moon'"></i>
           @if (!collapsed) {
