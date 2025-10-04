@@ -1,5 +1,57 @@
+/* Header (falls du oben einen Bereich hast, z. B. Chat-Header) */
 .design-header {
-    margin-top: 10px;
+  margin-top: 10px;
   background-color: var(--p-surface-ground);
   border-radius: 5px;
+}
+
+/* Nachrichten-Container */
+.message-container {
+  display: flex;
+  align-items: flex-end;    /* Avatar + Bubble unten ausrichten */
+  margin: 0.5rem 0;
+  list-style: none;
+}
+
+/* Eigene Nachrichten (rechts) */
+.own-message {
+  justify-content: flex-end;   /* nach rechts schieben */
+  text-align: right;
+}
+
+/* Avatar nur bei fremden Nachrichten */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;   /* rund wie WhatsApp */
+  margin-right: 0.5rem;
+}
+
+/* Bubble (gemeinsame Basis) */
+.message-body {
+  display: inline-block;
+  padding: 0.5rem 2.5rem 0.8rem 0.8rem; /* rechts Platz für Zeit */
+  border-radius: 8px;
+  max-width: 70%;
+  position: relative;
+  line-height: 1.4;
+  font-size: 1rem;
+  word-wrap: break-word;      /* lange Wörter umbrechen */
+}
+
+/* Zeit unten rechts in der Bubble */
+.message-body .timestamp {
+  position: absolute;
+  right: 0.4rem;
+  bottom: 0.2rem;
+  font-size: 0.7rem;
+  color: gray;
+}
+
+/* Farben für die Bubbles */
+.own-message .message-body {
+  background-color: #DCF8C6; /* WhatsApp-like grün */
+}
+.message-container:not(.own-message) .message-body {
+  background-color: #ECECEC; /* grau für andere */
 }

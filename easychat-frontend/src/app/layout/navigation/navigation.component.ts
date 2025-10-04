@@ -49,6 +49,4 @@ export class NavigationComponent {
   showDialog(): void {
     this.visible = true;
   }
-
-  trackById = (_: number, item: NavItem) => item.id ?? item.label;
 }

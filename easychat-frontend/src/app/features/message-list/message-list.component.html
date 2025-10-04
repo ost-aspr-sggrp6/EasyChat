@@ -4,16 +4,20 @@
   </div>
   <ul>
     @for (msg of messages; track msg._id) {
-      <li>
-        <div class="message-header">
-          <span class="user">👤 {{ msg.userId }}</span>
-          <span class="timestamp">
-            {{ msg.timestamp | date:'short' }}
-          </span>
-        </div>
+      <li
+        class="message-container"
+        [ngClass]="{ 'own-message': msg.userId === 'Zt3FLWISKCJRalwJAAAB' }">
+
+        @if (msg.userId !== 'Zt3FLWISKCJRalwJAAAB') {
+          <img class="avatar" src="assets/avatars/{{ msg.userId }}.png" alt="avatar" />
+        }
+
         <div class="message-body">
-          {{ msg.message }}
+          <span class="text">{{ msg.message }}</span>
+          <span class="text">{{ msg.userId }}</span>
+          <span class="timestamp">{{ msg.timestamp | date:'shortTime' }}</span>
         </div>
+
       </li>
     }
   </ul>

@@ -1,5 +1,10 @@
 /* src/app/sidenav/sidenav.component.scss */
-:host { display: block; height: 100%; }
+:host {
+  display: block;
+  height: 100%;
+  flex-shrink: 0;
+  background-color: var(--p-surface-ground);
+}
 
 $sidenav-width-expanded: 240px;
 $sidenav-width-collapsed: 72px;
